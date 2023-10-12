@@ -133,6 +133,7 @@ namespace AutoMapper
                     from extensionMethod in sourceExtensionMethodSearch
                     where extensionMethod.IsGenericMethodDefinition
                         && extensionMethod.GetGenericArguments().Length == genericInterfaceArguments.Length
+                        && extensionMethod.GetGenericArguments().All(t => t.GetGenericParameterConstraints().Length == 0)
                     select extensionMethod.MakeGenericMethod(genericInterfaceArguments)
                 )
                 from methodMatch in matchedMethods
